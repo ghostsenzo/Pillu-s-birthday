@@ -45,7 +45,7 @@
       date: '',
       description:
         'The early days, when every small thing felt new. I remember exactly how it felt to realize I wanted more of this — more of you, more of us, more of this feeling.',
-      photos: ['assets/images/gf20.jpg', 'assets/images/us10.jpg'],
+      photos: ['assets/images/gf20.jpg', 'us10.jpg'],
     },
     {
       title: 'Little Moments',
