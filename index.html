@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" class="pre-reveal">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>A Special Gift Is Waiting...</title>
+<meta name="description" content="A cinematic birthday surprise for someone special." />
+
+<!-- Fonts: Cormorant Garamond (display/serif) + Jost (utility/body) + Caveat (handwritten accent, Section 5) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/global.css" />
+<link rel="stylesheet" href="css/countdown.css" />
+<link rel="stylesheet" href="css/birthday.css" />
+<link rel="stylesheet" href="css/story.css" />
+<link rel="stylesheet" href="css/gallery.css" />
+<link rel="stylesheet" href="css/letter.css" />
+<link rel="stylesheet" href="css/future.css" />
+<link rel="stylesheet" href="css/final.css" />
+</head>
+<body>
+
+<!-- ============================================= -->
+<!-- SECTION 1 — INTRO / INTERACTIVE GIFT           -->
+<!-- The old countdown gate has been removed.         -->
+<!-- ============================================= -->
+<section id="section-countdown" class="section section--countdown" aria-label="Your birthday surprise">
+
+  <!-- Night sky canvas: stars, dust particles, twinkle -->
+  <canvas id="sky-canvas" class="sky-canvas" aria-hidden="true"></canvas>
+
+  <!-- Moon + glow -->
+  <div class="moon" aria-hidden="true">
+    <div class="moon__glow"></div>
+    <div class="moon__body"></div>
+  </div>
+
+  <!-- Drifting clouds -->
+  <div class="clouds" aria-hidden="true">
+    <div class="cloud cloud--1"></div>
+    <div class="cloud cloud--2"></div>
+    <div class="cloud cloud--3"></div>
+  </div>
+
+  <!-- Vignette for cinematic depth -->
+  <div class="vignette" aria-hidden="true"></div>
+
+  <div class="countdown-content">
+
+    <p class="eyebrow-text">&hearts; For My Princess &hearts;</p>
+
+    <h1 class="reveal-heading">
+      <span class="reveal-heading__line">A Special Gift</span>
+      <span class="reveal-heading__line reveal-heading__line--accent">Is Waiting For You</span>
+    </h1>
+
+    <div class="gift-stage">
+      <!-- Soft floor shadow -->
+      <div class="gift-shadow" aria-hidden="true"></div>
+
+      <!-- Gift box (SVG, layered for depth) -->
+      <button type="button" id="gift-box" class="gift-box" aria-label="Open your birthday surprise">
+        <svg class="gift-box__glow" viewBox="0 0 300 300" aria-hidden="true">
+          <defs>
+            <radialGradient id="giftGlow" cx="50%" cy="55%" r="55%">
+              <stop offset="0%" stop-color="var(--gold)" stop-opacity="0.55" />
+              <stop offset="100%" stop-color="var(--gold)" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <circle cx="150" cy="160" r="140" fill="url(#giftGlow)" />
+        </svg>
+
+        <svg class="gift-box__art" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="boxFront" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#a25c86" />
+              <stop offset="100%" stop-color="#7d3f68" />
+            </linearGradient>
+            <linearGradient id="boxSide" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#5c2c4d" />
+              <stop offset="100%" stop-color="#712f56" />
+            </linearGradient>
+            <linearGradient id="lidTop" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#c97aa8" />
+              <stop offset="100%" stop-color="#9b5586" />
+            </linearGradient>
+            <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="var(--gold-light)" />
+              <stop offset="100%" stop-color="var(--gold)" />
+            </linearGradient>
+            <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%">
+              <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#150019" flood-opacity="0.45" />
+            </filter>
+          </defs>
+
+          <!-- Box body -->
+          <g id="giftBody" filter="url(#softShadow)">
+            <rect x="70" y="150" width="160" height="110" rx="6" fill="url(#boxFront)" />
+            <rect x="70" y="150" width="18" height="110" fill="url(#boxSide)" opacity="0.55" />
+            <rect x="140" y="150" width="20" height="110" fill="url(#ribbonGrad)" />
+            <path d="M70 150 L150 150 L150 258 L70 258 Z" fill="url(#boxFront)" opacity="0.001" />
+          </g>
+
+          <!-- Lid group (animated: opens on unlock) -->
+          <g id="giftLid" class="gift-lid">
+            <rect x="58" y="126" width="184" height="34" rx="8" fill="url(#lidTop)" filter="url(#softShadow)" />
+            <rect x="132" y="126" width="20" height="34" fill="url(#ribbonGrad)" />
+            <!-- Bow -->
+            <g id="giftBow" transform="translate(150,120)">
+              <path d="M0 0 C -34 -34 -58 -10 -30 8 C -18 16 -6 8 0 0 Z" fill="url(#ribbonGrad)" />
+              <path d="M0 0 C 34 -34 58 -10 30 8 C 18 16 6 8 0 0 Z" fill="url(#ribbonGrad)" />
+              <circle cx="0" cy="2" r="10" fill="var(--gold-light)" />
+            </g>
+          </g>
+        </svg>
+
+        <!-- Golden light burst, hidden until unlock -->
+        <div class="gift-burst" id="gift-burst" aria-hidden="true"></div>
+      </button>
+    </div>
+
+    <p class="hint-text">Tap to open your surprise.</p>
+  </div>
+
+  <!-- Fullscreen unlock canvas: confetti + fireworks, sits above everything during the reveal -->
+  <canvas id="unlock-canvas" class="unlock-canvas" aria-hidden="true"></canvas>
+</section>
+
+<!-- ============================================= -->
+<!-- SECTION 2 — HAPPY BIRTHDAY                     -->
+<!-- ============================================= -->
+<div id="sections-root">
+  <section id="section-birthday" class="section section--birthday" aria-label="Happy Birthday">
+
+    <!-- Ambient particle canvas: glowing dust + occasional soft hearts -->
+    <canvas id="birthday-canvas" class="birthday-canvas" aria-hidden="true"></canvas>
+
+    <!-- Slow-drifting nebula glows, pure CSS for cheap ambient motion -->
+    <div class="birthday-glow birthday-glow--pink" aria-hidden="true"></div>
+    <div class="birthday-glow birthday-glow--purple" aria-hidden="true"></div>
+    <div class="birthday-glow birthday-glow--gold" aria-hidden="true"></div>
+
+    <!-- Elegant floating balloons, not cartoonish: soft gradients, thin strings -->
+    <div class="balloons" aria-hidden="true">
+      <span class="balloon balloon--1"></span>
+      <span class="balloon balloon--2"></span>
+      <span class="balloon balloon--3"></span>
+      <span class="balloon balloon--4"></span>
+    </div>
+
+    <div class="vignette" aria-hidden="true"></div>
+
+    <div class="birthday-content">
+
+      <h2 class="birthday-heading" id="birthday-heading" aria-label="Happy Birthday">
+        <span class="birthday-heading__row" data-word="HAPPIEE"></span>
+        <span class="birthday-heading__row" data-word="BIRTHDAYYYY"></span>
+      </h2>
+
+      <div class="birthday-heart" id="birthday-heart" aria-hidden="true">
+        <svg viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 28.5C16 28.5 1 19.6 1 9.4 1 4.3 5 1 9.3 1c2.9 0 5.4 1.6 6.7 4 1.3-2.4 3.8-4 6.7-4C27 1 31 4.3 31 9.4 31 19.6 16 28.5 16 28.5Z" />
+        </svg>
+      </div>
+
+      <p class="birthday-name" id="birthday-name" aria-label=""></p>
+
+      <p class="birthday-message" id="birthday-message">
+        Today the whole world feels a little softer, a little brighter &mdash;
+        because it&rsquo;s the day you were born. I hope this small effort of
+        mine on the internet holds even a bit of the joy and love you
+        bring into every single day we share. Here&rsquo;s to celebrating your 19th
+        birthday and i will give my best to make sure this birthday goes even better
+        then the last one !
+      </p>
+
+      <button type="button" id="birthday-continue" class="birthday-continue">
+        <span>Continue</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- SECTION 3 — OUR STORY                          -->
+  <!-- ============================================= -->
+  <section id="section-story" class="section section--story" aria-label="Our Story">
+
+    <!-- Ambient particle canvas, continuing the visual language from Section 2 -->
+    <canvas id="story-canvas" class="story-canvas" aria-hidden="true"></canvas>
+
+    <!-- Slow-drifting nebula glows -->
+    <div class="story-glow story-glow--purple" aria-hidden="true"></div>
+    <div class="story-glow story-glow--pink" aria-hidden="true"></div>
+    <div class="story-glow story-glow--gold" aria-hidden="true"></div>
+
+    <div class="vignette" aria-hidden="true"></div>
+
+    <div class="story-inner">
+
+      <div class="story-intro" id="story-intro">
+        <p class="story-intro__eyebrow">Our Story</p>
+        <h2 class="story-intro__line">Every beautiful story is made of little moments&hellip;</h2>
+      </div>
+
+      <div class="story-timeline" id="story-timeline">
+        <div class="story-timeline__track" aria-hidden="true">
+          <div class="story-timeline__fill" id="story-timeline-fill"></div>
+        </div>
+        <ol class="story-timeline__list" id="story-timeline-list">
+          <!-- Memory cards are injected here by js/story.js from the
+               storyMemories array — see that file to add or edit memories. -->
+        </ol>
+      </div>
+
+      <div class="story-ending" id="story-ending">
+        <p class="story-ending__line">And somehow, every little moment became a part of us.</p>
+        <button type="button" id="story-continue" class="story-continue">
+          <span>Continue</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- SECTION 4 — PHOTO GALLERY                      -->
+  <!-- ============================================= -->
+  <section id="section-gallery" class="section section--gallery" aria-label="A Little Gallery of You">
+
+    <!-- Ambient particle canvas, continuing the visual language from Sections 2–3 -->
+    <canvas id="gallery-canvas" class="gallery-canvas" aria-hidden="true"></canvas>
+
+    <!-- Slow-drifting nebula glows -->
+    <div class="gallery-glow gallery-glow--pink" aria-hidden="true"></div>
+    <div class="gallery-glow gallery-glow--purple" aria-hidden="true"></div>
+    <div class="gallery-glow gallery-glow--gold" aria-hidden="true"></div>
+
+    <div class="vignette" aria-hidden="true"></div>
+
+    <div class="gallery-inner">
+
+      <div class="gallery-intro" id="gallery-intro">
+        <p class="gallery-intro__eyebrow">Our Memories</p>
+        <h2 class="gallery-intro__line">A Little Gallery of You</h2>
+        <p class="gallery-intro__sub">Some moments are too beautiful to exist only in memories.</p>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid" role="list" aria-label="Photo gallery">
+        <!-- Gallery items are injected here by js/gallery.js from the
+             galleryPhotos array — see that file to add or edit photos. -->
+      </div>
+
+      <div class="gallery-ending" id="gallery-ending">
+        <p class="gallery-ending__line">And these are only a few of the moments that make you so special to me.</p>
+        <button type="button" id="gallery-continue" class="gallery-continue">
+          <span>Continue</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Fullscreen lightbox -->
+    <div class="lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+      <div class="lightbox__backdrop" id="lightbox-backdrop"></div>
+
+      <button type="button" class="lightbox__close" id="lightbox-close" aria-label="Close photo viewer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+
+      <button type="button" class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <figure class="lightbox__figure">
+        <img class="lightbox__image" id="lightbox-image" src="" alt="" />
+        <figcaption class="lightbox__caption" id="lightbox-caption">
+          <span class="lightbox__title" id="lightbox-title"></span>
+          <span class="lightbox__text" id="lightbox-text"></span>
+          <span class="lightbox__date" id="lightbox-date"></span>
+        </figcaption>
+      </figure>
+
+      <button type="button" class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- SECTION 5 — A LETTER FOR YOU                   -->
+  <!-- ============================================= -->
+  <section id="section-letter" class="section section--letter" aria-label="A letter for you">
+
+    <!-- Ambient particle canvas: sparser and slower than earlier sections -->
+    <canvas id="letter-canvas" class="letter-canvas" aria-hidden="true"></canvas>
+
+    <div class="letter-glow letter-glow--purple" aria-hidden="true"></div>
+    <div class="letter-glow letter-glow--gold" aria-hidden="true"></div>
+
+    <div class="vignette" aria-hidden="true"></div>
+
+    <div class="letter-inner">
+
+      <div class="letter-intro" id="letter-intro">
+        <p class="letter-intro__line" data-line="1">There&rsquo;s something I&rsquo;ve been wanting to tell you&hellip;</p>
+        <p class="letter-intro__line letter-intro__line--accent" data-line="2">So, for your birthday, I decided to put it into words.</p>
+      </div>
+
+      <div class="letter-card" id="letter-card">
+        <div class="letter-card__sheen" aria-hidden="true"></div>
+
+        <div class="letter-card__body">
+          <p class="letter-card__greeting" id="letter-greeting"></p>
+
+          <div class="letter-card__paragraphs" id="letter-paragraphs">
+            <!-- Paragraphs are injected here by js/letter.js from the
+                 letterContent array — see that file to write your own words. -->
+          </div>
+
+          <p class="letter-card__final" id="letter-final"></p>
+
+          <div class="letter-card__heart" id="letter-heart" aria-hidden="true">
+            <svg viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 28.5C16 28.5 1 19.6 1 9.4 1 4.3 5 1 9.3 1c2.9 0 5.4 1.6 6.7 4 1.3-2.4 3.8-4 6.7-4C27 1 31 4.3 31 9.4 31 19.6 16 28.5 16 28.5Z" />
+            </svg>
+          </div>
+
+          <div class="letter-card__signature" id="letter-signature">
+            <span class="letter-card__signature-line">Always yours,</span>
+            <span class="letter-card__signature-name" id="letter-signature-name">YOUR NAME &hearts;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="letter-ending" id="letter-ending">
+        <button type="button" id="letter-continue" class="letter-continue">
+          <span>Continue</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- SECTION 6 — FOR ALL THE MOMENTS YET TO COME    -->
+  <!-- ============================================= -->
+  <section id="section-future" class="section section--future" aria-label="For all the moments yet to come">
+
+    <canvas id="future-canvas" class="future-canvas" aria-hidden="true"></canvas>
+    <div class="future-glow" id="future-glow" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <div class="future-inner">
+
+      <div class="future-intro" id="future-intro">
+        <p class="future-intro__eyebrow">What&rsquo;s Still Ahead</p>
+        <h2 class="future-intro__line">For All The Moments Yet To Come</h2>
+        <p class="future-intro__sub">Our story isn&rsquo;t finished. There are still so many pages left to write.</p>
+      </div>
+
+      <div class="future-timeline" id="future-timeline">
+        <div class="future-timeline__track" aria-hidden="true">
+          <div class="future-timeline__fill" id="future-timeline-fill"></div>
+        </div>
+        <ol class="future-timeline__list" id="future-timeline-list" role="list" aria-label="Moments still to come">
+          <!-- Cards are injected here by js/future.js from the
+               futureMoments array — see that file to edit them. -->
+        </ol>
+      </div>
+
+      <div class="future-ending" id="future-ending">
+        <p class="future-ending__line" data-line="1">We&rsquo;ve already made memories I&rsquo;ll always treasure&hellip;</p>
+        <p class="future-ending__line" data-line="2">&hellip;and I can&rsquo;t wait to see what comes next.</p>
+        <p class="future-ending__line future-ending__line--final" data-line="3">Because the best parts of our story might still be ahead. &hearts;</p>
+
+        <button type="button" id="future-continue" class="future-continue">
+          <span>Continue</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- SECTION 7 — THE FINAL SURPRISE                 -->
+  <!-- ============================================= -->
+  <section id="section-final" class="section section--final" aria-label="The final birthday surprise">
+    <canvas id="final-canvas" class="final-canvas" aria-hidden="true"></canvas>
+    <div class="final-glow" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <div class="final-inner">
+      <div class="final-intro" id="final-intro">
+        <p class="final-intro__line">And there&rsquo;s just one more thing&hellip;</p>
+        <p class="final-intro__sub">Something I saved just for you.</p>
+        <button type="button" id="final-open" class="final-open">Open My Final Message <span aria-hidden="true">&hearts;</span></button>
+      </div>
+
+      <div class="final-message" id="final-message" aria-live="polite">
+        <p class="final-message__eyebrow">For You</p>
+        <h2 class="final-message__heading">Happiee Birthdayyy</h2>
+        <p class="final-message__name" id="final-name"></p>
+
+        <div class="final-message__card">
+          <div class="final-lines" id="final-lines"></div>
+          <p class="final-message__closing" id="final-closing"></p>
+          <div class="final-signature" id="final-signature">
+            <span class="final-signature__line">Always yours,</span>
+            <span class="final-signature__name" id="final-signature-name">YOUR NAME &hearts;</span>
+          </div>
+        </div>
+
+        <button type="button" id="final-replay" class="final-replay">Replay the final surprise</button>
+      </div>
+
+      <div class="final-heart" id="final-heart" aria-hidden="true"></div>
+    </div>
+  </section>
+</div>
+
+
+<script src="js/animations.js"></script>
+<script src="js/birthday.js"></script>
+<script src="js/story.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/letter.js"></script>
+<script src="js/future.js"></script>
+<script src="js/final.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
